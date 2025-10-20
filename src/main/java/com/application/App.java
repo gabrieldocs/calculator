@@ -1,31 +1,21 @@
 package com.application;
 
+import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         System.out.println("Calculate ammount after *-*");
-        Calculator.composite(1000, 0.8, 36);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Initial ammount: ");
+        double initial = scanner.nextDouble();
+        System.out.print("Interest rate (%): ");
+        double interest = scanner.nextDouble();
+        System.out.print("Period (months): "); 
+        int period = scanner.nextInt();
+        System.out.println("Composite Interest:");
+        Calculator.composite(initial, interest, period);
+        System.out.println("Simple Interest:");
+        Calculator.simple(initial, interest, period);
+        scanner.close();
     }
 }
 
-class Calculator {
-    public static void composite(double initial, double interest, int period) {
-        int i = 0;
-        double acc = initial;
-        do {
-            double gain = acc * interest / 100;
-            acc = acc + gain;
-            if (i == 0) {
-                System.out.println("+------------+------------+------------+------------+------------+");
-                System.out.printf("| %10s | %10s | %10s | %10s | %10s |\n", "Period", "Interest", "Initial", "Gain",
-                        "Total");
-                System.out.println("+------------+------------+------------+------------+------------+");
-            }
-            System.out.printf("| %10d | %10.2f | %10.2f | %10.2f | %10.2f |\n", i, interest, initial, gain, acc);
-            if (i == period) {
-                System.out.println("+------------+------------+------------+------------+------------+");
-            }
-            i += 1;
-        } while (i <= period);
-    }
-
-}
